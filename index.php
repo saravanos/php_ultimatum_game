@@ -233,6 +233,14 @@
         document.addEventListener("DOMContentLoaded", function() {
             // ... Existing JavaScript code ...
 
+            const likertQuestions = document.getElementById("likertQuestions");
+            const startGameButton = document.getElementById("startGame");
+
+            startGameButton.addEventListener("click", function() {
+                likertQuestions.style.display = "none";
+                switchToPlayer2View();
+            });
+
             const likertQuestionsEnd = document.getElementById("likertQuestionsEnd");
             const submitFeedbackButton = document.getElementById("submitFeedback");
             const thankYouMessage = document.getElementById("thankYou");

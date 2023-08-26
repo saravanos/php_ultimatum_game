@@ -291,7 +291,6 @@
                     alert('You must consent to participate.');
                 }
             });
-        });
 
 
         $(function() {

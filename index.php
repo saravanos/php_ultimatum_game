@@ -192,17 +192,33 @@
 
     <!-- Player 1's view -->
     <div id="player1" class="view">
-        <!-- ... Existing Player 1's view HTML ... -->
+        <label for="proposal" class="label">Player 1's Proposal: $</label>
+        <input type="number" id="proposal" class="input" min="0" max="100" step="1">
+        <button id="submit" class="button">Submit Proposal</button>
+        <p id="result" class="result"></p>
     </div>
 
     <!-- Player 2's view -->
     <div id="player2" class="view">
-        <!-- ... Existing Player 2's view HTML ... -->
+        <p class="proposal">Player 1 proposes to give you: <span id="proposalAmount" class="amount"></span></p>
+        <button id="accept" class="button">Accept</button>
+        <button id="reject" class="button">Reject</button>
+        <p id="result" class="result"></p>
     </div>
 
     <!-- Results view -->
     <div id="results" class="view">
-        <!-- ... Existing Results view HTML ... -->
+        <h2 class="subtitle">Results</h2>
+        <table class="table">
+            <tr>
+                <th>Player 1 ID</th>
+                <th>Player 1 Proposal</th>
+                <th>Player 2 Decision</th>
+                <th>Player 1 Payoff</th>
+                <th>Player 2 Payoff</th>
+            </tr>
+            <!-- Display the results here -->
+        </table>
     </div>
 
     <!-- Additional Likert scale questions after the game ends -->

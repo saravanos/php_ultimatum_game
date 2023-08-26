@@ -272,6 +272,7 @@
         $(document).ready(function() {
             // Display consent page initially
             $('#consentPage').show();
+            $('#page-likertQuestions').hide(); // Hide the questionnaire initially
 
             $('#consentForm').on('submit', function(event) {
                 event.preventDefault();
@@ -281,7 +282,7 @@
                     $.post('record_consent.php', { time: new Date().toISOString() }, function(data) {
                         if (data.success) {
                             $('#consentPage').hide();
-                            // Display the next part of your game or instructions here
+                            $('#page-likertQuestions').show(); // Show the questionnaire
                         } else {
                             alert('Error recording consent. Please try again.');
                         }
@@ -291,6 +292,7 @@
                 }
             });
         });
+
 
         $(function() {
             $(".button").button();

@@ -98,99 +98,106 @@
 </head>
 <body>
     <?php
-    // Database connection setup
-    $dbHost = "localhost";
-    $dbUser = "saravano_game";
-    $dbPass = "zxcDSA123!!!";
-    $dbName = "saravano_game";
+        // Database connection setup
+        $dbHost = "localhost";
+        $dbUser = "saravano_game";
+        $dbPass = "zxcDSA123!!!";
+        $dbName = "saravano_game";
 
-    $conn = new mysqli($dbHost, $dbUser, $dbPass, $dbName);
+        $conn = new mysqli($dbHost, $dbUser, $dbPass, $dbName);
 
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        // ... Existing code ...
-
-        // Rest of the game logic...
-        // Save Likert scale responses and game data to the database
-                $q1Response = $_POST["q1"];
-                $q2Response = $_POST["q2"];
-
-                // Insert Likert responses into the database
-                $insertLikertQuery = "INSERT INTO likert_responses (question_1, question_2) VALUES (?, ?)";
-                $stmt = $conn->prepare($insertLikertQuery);
-                $stmt->bind_param("ii", $q1Response, $q2Response);
-                $stmt->execute();
-
-                // Rest of the game logic...
-                // ... Existing PHP code ...
-
-                // Save additional Likert responses after game ends
-                $q3Response = $_POST["q3"];
-                $q4Response = $_POST["q4"];
-
-                // Insert additional Likert responses into the database
-                $insertFeedbackQuery = "INSERT INTO feedback_responses (question_3, question_4) VALUES (?, ?)";
-                $stmtFeedback = $conn->prepare($insertFeedbackQuery);
-                $stmtFeedback->bind_param("ii", $q3Response, $q4Response);
-                $stmtFeedback->execute();
-
-                // Generate and store a random compensation code
-                $compensationCode = generateRandomCode();
-                $insertCompensationCodeQuery = "INSERT INTO compensation_codes (code) VALUES (?)";
-                $stmtCode = $conn->prepare($insertCompensationCodeQuery);
-                $stmtCode->bind_param("s", $compensationCode);
-                $stmtCode->execute();
-            }
-
-            function generateRandomCode() {
-                $characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-                $code = "";
-                for ($i = 0; $i < 8; $i++) {
-                    $randomIndex = rand(0, strlen($characters) - 1);
-                    $code .= $characters[$randomIndex];
-                }
-                return $code;
-            }
-
-        // Save additional Likert responses after game ends
-        $q3Response = $_POST["q3"];
-        $q4Response = $_POST["q4"];
-
-        // Insert additional Likert responses into the database
-        $insertFeedbackQuery = "INSERT INTO feedback_responses (question_3, question_4) VALUES (?, ?)";
-        $stmtFeedback = $conn->prepare($insertFeedbackQuery);
-        $stmtFeedback->bind_param("ii", $q3Response, $q4Response);
-        $stmtFeedback->execute();
-
-        // Generate and store a random compensation code
-        $compensationCode = generateRandomCode();
-        $insertCompensationCodeQuery = "INSERT INTO compensation_codes (code) VALUES (?)";
-        $stmtCode = $conn->prepare($insertCompensationCodeQuery);
-        $stmtCode->bind_param("s", $compensationCode);
-        $stmtCode->execute();
-    }
-
-    function generateRandomCode() {
-        $characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        $code = "";
-        for ($i = 0; $i < 8; $i++) {
-            $randomIndex = rand(0, strlen($characters) - 1);
-            $code .= $characters[$randomIndex];
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
         }
-        return $code;
-    }
-    ?>
 
-    <h1 class="title">Ultimatum Game</h1>
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+                    $q1Response = $_POST["q1"];
+                    $q2Response = $_POST["q2"];
+
+                    // Insert Likert responses into the database
+                    $insertLikertQuery = "INSERT INTO likert_responses (question_1, question_2) VALUES (?, ?)";
+                    $stmt = $conn->prepare($insertLikertQuery);
+                    $stmt->bind_param("ii", $q1Response, $q2Response);
+                    $stmt->execute();
+
+                    // Rest of the game logic...
+                    // ... Existing PHP code ...
+
+                    // Save additional Likert responses after game ends
+                    $q3Response = $_POST["q3"];
+                    $q4Response = $_POST["q4"];
+
+                    // Insert additional Likert responses into the database
+                    $insertFeedbackQuery = "INSERT INTO feedback_responses (question_3, question_4) VALUES (?, ?)";
+                    $stmtFeedback = $conn->prepare($insertFeedbackQuery);
+                    $stmtFeedback->bind_param("ii", $q3Response, $q4Response);
+                    $stmtFeedback->execute();
+
+                    // Generate and store a random compensation code
+                    $compensationCode = generateRandomCode();
+                    $insertCompensationCodeQuery = "INSERT INTO compensation_codes (code) VALUES (?)";
+                    $stmtCode = $conn->prepare($insertCompensationCodeQuery);
+                    $stmtCode->bind_param("s", $compensationCode);
+                    $stmtCode->execute();
+                }
+
+                function generateRandomCode() {
+                    $characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                    $code = "";
+                    for ($i = 0; $i < 8; $i++) {
+                        $randomIndex = rand(0, strlen($characters) - 1);
+                        $code .= $characters[$randomIndex];
+                    }
+                    return $code;
+                }
+
+            // Save additional Likert responses after game ends
+            $q3Response = $_POST["q3"];
+            $q4Response = $_POST["q4"];
+
+            // Insert additional Likert responses into the database
+            $insertFeedbackQuery = "INSERT INTO feedback_responses (question_3, question_4) VALUES (?, ?)";
+            $stmtFeedback = $conn->prepare($insertFeedbackQuery);
+            $stmtFeedback->bind_param("ii", $q3Response, $q4Response);
+            $stmtFeedback->execute();
+
+            // Generate and store a random compensation code
+            $compensationCode = generateRandomCode();
+            $insertCompensationCodeQuery = "INSERT INTO compensation_codes (code) VALUES (?)";
+            $stmtCode = $conn->prepare($insertCompensationCodeQuery);
+            $stmtCode->bind_param("s", $compensationCode);
+            $stmtCode->execute();
+        }
+
+        function generateRandomCode() {
+            $characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            $code = "";
+            for ($i = 0; $i < 8; $i++) {
+                $randomIndex = rand(0, strlen($characters) - 1);
+                $code .= $characters[$randomIndex];
+            }
+            return $code;
+        }
+    ?>
 
     <!-- Likert scale questions for participants -->
     <h2>Participant Questionnaire</h2>
     <p>Please rate the following statements:</p>
     <div id="likertQuestions">
-        <!-- ... Existing Likert questions ... -->
+        <p>1. I am excited to participate in this game:</p>
+        <label><input type="radio" name="q1" value="1"> Strongly Disagree</label>
+        <label><input type="radio" name="q1" value="2"> Disagree</label>
+        <label><input type="radio" name="q1" value="3"> Neutral</label>
+        <label><input type="radio" name="q1" value="4"> Agree</label>
+        <label><input type="radio" name="q1" value="5"> Strongly Agree</label>
+
+        <p>2. I feel uncertain about the outcome of the game:</p>
+        <label><input type="radio" name="q2" value="1"> Strongly Disagree</label>
+        <label><input type="radio" name="q2" value="2"> Disagree</label>
+        <label><input type="radio" name="q2" value="3"> Neutral</label>
+        <label><input type="radio" name="q2" value="4"> Agree</label>
+        <label><input type="radio" name="q2" value="5"> Strongly Agree</label>
     </div>
     <button id="startGame">Start Game</button>
 

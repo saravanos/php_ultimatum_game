@@ -9,7 +9,90 @@
             margin: 0;
             padding: 0;
         }
-        /* ... Other CSS styles ... */
+
+        .title {
+            text-align: center;
+            padding: 20px;
+            font-size: 28px;
+            color: #333;
+        }
+
+        .view {
+            display: none;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            max-width: 400px;
+        }
+
+        .label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .proposal {
+            font-size: 16px;
+        }
+
+        .amount {
+            font-weight: bold;
+        }
+
+        .subtitle {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #ccc;
+        }
+
+        .table th, .table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .table th {
+            font-weight: bold;
+            background-color: #f2f2f2;
+        }
+
+        .table tr:last-child td {
+            border-bottom: none;
+        }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -31,7 +114,47 @@
         // ... Existing code ...
 
         // Rest of the game logic...
-        // ... Existing PHP code ...
+        // Save Likert scale responses and game data to the database
+                $q1Response = $_POST["q1"];
+                $q2Response = $_POST["q2"];
+
+                // Insert Likert responses into the database
+                $insertLikertQuery = "INSERT INTO likert_responses (question_1, question_2) VALUES (?, ?)";
+                $stmt = $conn->prepare($insertLikertQuery);
+                $stmt->bind_param("ii", $q1Response, $q2Response);
+                $stmt->execute();
+
+                // Rest of the game logic...
+                // ... Existing PHP code ...
+
+                // Save additional Likert responses after game ends
+                $q3Response = $_POST["q3"];
+                $q4Response = $_POST["q4"];
+
+                // Insert additional Likert responses into the database
+                $insertFeedbackQuery = "INSERT INTO feedback_responses (question_3, question_4) VALUES (?, ?)";
+                $stmtFeedback = $conn->prepare($insertFeedbackQuery);
+                $stmtFeedback->bind_param("ii", $q3Response, $q4Response);
+                $stmtFeedback->execute();
+
+                // Generate and store a random compensation code
+                $compensationCode = generateRandomCode();
+                $insertCompensationCodeQuery = "INSERT INTO compensation_codes (code) VALUES (?)";
+                $stmtCode = $conn->prepare($insertCompensationCodeQuery);
+                $stmtCode->bind_param("s", $compensationCode);
+                $stmtCode->execute();
+            }
+
+            function generateRandomCode() {
+                $characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                $code = "";
+                for ($i = 0; $i < 8; $i++) {
+                    $randomIndex = rand(0, strlen($characters) - 1);
+                    $code .= $characters[$randomIndex];
+                }
+                return $code;
+            }
+.
 
         // Save additional Likert responses after game ends
         $q3Response = $_POST["q3"];

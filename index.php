@@ -1,3 +1,36 @@
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Placeholder database credentials - replace with your actual credentials
+    $db_host = 'YOUR_DB_HOST';
+    $db_user = 'YOUR_DB_USERNAME';
+    $db_pass = 'YOUR_DB_PASSWORD';
+    $db_name = 'YOUR_DB_NAME';
+
+    // Connect to the database
+    $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Get the timestamp from POST data
+    $timestamp = $_POST['time'];
+
+    // Insert the timestamp into the database
+    $sql = "INSERT INTO consent_records (timestamp) VALUES ('$timestamp')";
+    if ($conn->query($sql) === TRUE) {
+        echo json_encode(['success' => true]);
+    } else {
+        echo json_encode(['success' => false, 'error' => $conn->error]);
+    }
+
+    // Close the connection
+    $conn->close();
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -96,11 +129,39 @@
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <!-- jQuery Mobile -->
-    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.5.0/jquery.mobile-1.5.0.min.css">
-    <script src="https://code.jquery.com/mobile/1.5.0/jquery.mobile-1.5.0.min.js"></script>
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+
 </head>
 <body>
+
+<div id="consentPage" class="view">
+    <h2>Consent to Participate</h2>
+    <p>Do you consent to participate in the Ultimatum Game 2?</p>
+    <button id="consentYes" class="button">Yes</button>
+</div>
+
+<script>
+    $(document).ready(function() {
+        // Display consent page initially
+        $('#consentPage').show();
+
+        $('#consentYes').on('click', function() {
+            // Record the consent in the database
+            $.post('record_consent.php', { time: new Date().toISOString() }, function(data) {
+                if (data.success) {
+                    $('#consentPage').hide();
+                    // Display the next part of your game or instructions here
+                } else {
+                    alert('Error recording consent. Please try again.');
+                }
+            });
+        });
+    });
+</script>
+
     <?php
         // Database connection setup
         $dbHost = "localhost";
@@ -125,9 +186,6 @@
             $stmt->bind_param("ii", $q1Response, $q2Response);
             $stmt->execute();
 
-            // Rest of the game logic...
-            // ... Existing PHP code ...
-
             // Save additional Likert responses after game ends
             $q3Response = $_POST["q3"];
             $q4Response = $_POST["q4"];
@@ -144,24 +202,6 @@
             $stmtCode = $conn->prepare($insertCompensationCodeQuery);
             $stmtCode->bind_param("s", $compensationCode);
             $stmtCode->execute();
-
-            // Save additional Likert responses after game ends
-            $q3Response = $_POST["q3"];
-            $q4Response = $_POST["q4"];
-
-            // Insert additional Likert responses into the database
-            $insertFeedbackQuery = "INSERT INTO feedback_responses (question_3, question_4) VALUES (?, ?)";
-            $stmtFeedback = $conn->prepare($insertFeedbackQuery);
-            $stmtFeedback->bind_param("ii", $q3Response, $q4Response);
-            $stmtFeedback->execute();
-
-            // Generate and store a random compensation code
-            $compensationCode = generateRandomCode();
-            $insertCompensationCodeQuery = "INSERT INTO compensation_codes (code) VALUES (?)";
-            $stmtCode = $conn->prepare($insertCompensationCodeQuery);
-            $stmtCode->bind_param("s", $compensationCode);
-            $stmtCode->execute();
-
         }
 
         function generateRandomCode() {
@@ -193,7 +233,7 @@
         <label><input type="radio" name="q2" value="4"> Agree</label>
         <label><input type="radio" name="q2" value="5"> Strongly Agree</label>
     </div>
-    <button id="startGame" class="ui-btn ui-btn-b ui-corner-all">Start Game</button>
+    <button id="startGame" class="button">Start Game</button>
 
     <!-- Player 1's view -->
     <div id="page-player1" data-role="page">
@@ -255,8 +295,12 @@
     </div>
 
     <script>
+
+        $(function() {
+            $(".button").button();
+        });
+
         document.addEventListener("DOMContentLoaded", function() {
-            // ... Existing JavaScript code ...
 
             const likertQuestions = document.getElementById("likertQuestions");
             const startGameButton = document.getElementById("startGame");
@@ -283,7 +327,6 @@
                 compensationCodeElement.textContent = compensationCode;
             });
 
-            // ... Existing JavaScript code ...
         });
     </script>
 </body>

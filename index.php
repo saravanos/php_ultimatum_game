@@ -1,4 +1,3 @@
-
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Placeholder database credentials - replace with your actual credentials
@@ -6,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $db_user = 'YOUR_DB_USERNAME';
     $db_pass = 'YOUR_DB_PASSWORD';
     $db_name = 'YOUR_DB_NAME';
-
+    
     // Connect to the database
     $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
 
@@ -30,7 +29,59 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $conn->close();
     exit;
 }
-?>
+?><?php
+        // Database connection setup
+        $dbHost = "localhost";
+        $dbUser = "saravano_game";
+        $dbPass = "zxcDSA123!!!";
+        $dbName = "saravano_game";
+
+        $conn = new mysqli($dbHost, $dbUser, $dbPass, $dbName);
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+            $q1Response = $_POST["q1"];
+            $q2Response = $_POST["q2"];
+
+            // Insert Likert responses into the database
+            $insertLikertQuery = "INSERT INTO likert_responses (question_1, question_2) VALUES (?, ?)";
+            $stmt = $conn->prepare($insertLikertQuery);
+            $stmt->bind_param("ii", $q1Response, $q2Response);
+            $stmt->execute();
+
+            // Save additional Likert responses after game ends
+            $q3Response = $_POST["q3"];
+            $q4Response = $_POST["q4"];
+
+            // Insert additional Likert responses into the database
+            $insertFeedbackQuery = "INSERT INTO feedback_responses (question_3, question_4) VALUES (?, ?)";
+            $stmtFeedback = $conn->prepare($insertFeedbackQuery);
+            $stmtFeedback->bind_param("ii", $q3Response, $q4Response);
+            $stmtFeedback->execute();
+
+            // Generate and store a random compensation code
+            $compensationCode = generateRandomCode();
+            $insertCompensationCodeQuery = "INSERT INTO compensation_codes (code) VALUES (?)";
+            $stmtCode = $conn->prepare($insertCompensationCodeQuery);
+            $stmtCode->bind_param("s", $compensationCode);
+            $stmtCode->execute();
+        }
+
+        function generateRandomCode() {
+            $characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            $code = "";
+            for ($i = 0; $i < 8; $i++) {
+                $randomIndex = rand(0, strlen($characters) - 1);
+                $code .= $characters[$randomIndex];
+            }
+            return $code;
+        }
+    ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -135,6 +186,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
 </head>
+
+
 <body>
 
 <div id="consentPage" class="view">
@@ -143,77 +196,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <button id="consentYes" class="button">Yes</button>
 </div>
 
-<script>
-    $(document).ready(function() {
-        // Display consent page initially
-        $('#consentPage').show();
 
-        $('#consentYes').on('click', function() {
-            // Record the consent in the database
-            $.post('record_consent.php', { time: new Date().toISOString() }, function(data) {
-                if (data.success) {
-                    $('#consentPage').hide();
-                    // Display the next part of your game or instructions here
-                } else {
-                    alert('Error recording consent. Please try again.');
-                }
-            });
-        });
-    });
-</script>
 
-    <?php
-        // Database connection setup
-        $dbHost = "localhost";
-        $dbUser = "saravano_game";
-        $dbPass = "zxcDSA123!!!";
-        $dbName = "saravano_game";
-
-        $conn = new mysqli($dbHost, $dbUser, $dbPass, $dbName);
-
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-
-        if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
-            $q1Response = $_POST["q1"];
-            $q2Response = $_POST["q2"];
-
-            // Insert Likert responses into the database
-            $insertLikertQuery = "INSERT INTO likert_responses (question_1, question_2) VALUES (?, ?)";
-            $stmt = $conn->prepare($insertLikertQuery);
-            $stmt->bind_param("ii", $q1Response, $q2Response);
-            $stmt->execute();
-
-            // Save additional Likert responses after game ends
-            $q3Response = $_POST["q3"];
-            $q4Response = $_POST["q4"];
-
-            // Insert additional Likert responses into the database
-            $insertFeedbackQuery = "INSERT INTO feedback_responses (question_3, question_4) VALUES (?, ?)";
-            $stmtFeedback = $conn->prepare($insertFeedbackQuery);
-            $stmtFeedback->bind_param("ii", $q3Response, $q4Response);
-            $stmtFeedback->execute();
-
-            // Generate and store a random compensation code
-            $compensationCode = generateRandomCode();
-            $insertCompensationCodeQuery = "INSERT INTO compensation_codes (code) VALUES (?)";
-            $stmtCode = $conn->prepare($insertCompensationCodeQuery);
-            $stmtCode->bind_param("s", $compensationCode);
-            $stmtCode->execute();
-        }
-
-        function generateRandomCode() {
-            $characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            $code = "";
-            for ($i = 0; $i < 8; $i++) {
-                $randomIndex = rand(0, strlen($characters) - 1);
-                $code .= $characters[$randomIndex];
-            }
-            return $code;
-        }
-    ?>
+    
 
     <!-- Likert scale questions for participants -->
     <h2>Participant Questionnaire</h2>
@@ -294,7 +279,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <p>Your compensation code is: <span id="compensationCode"></span></p>
     </div>
 
-    <script>
+    
+<script>
+    $(document).ready(function() {
+        // Display consent page initially
+        $('#consentPage').show();
+        
+        $('#consentYes').on('click', function() {
+            // Record the consent in the database
+            $.post('record_consent.php', { time: new Date().toISOString() }, function(data) {
+                if (data.success) {
+                    $('#consentPage').hide();
+                    // Display the next part of your game or instructions here
+                } else {
+                    alert('Error recording consent. Please try again.');
+                }
+            });
+        });
+    });
+</script>
+
+<script>
 
         $(function() {
             $(".button").button();
@@ -330,4 +335,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         });
     </script>
-
+</body>

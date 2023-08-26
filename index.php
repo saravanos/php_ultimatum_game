@@ -142,16 +142,6 @@
             $stmtCode->execute();
         }
 
-        function generateRandomCode() {
-            $characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            $code = "";
-            for ($i = 0; $i < 8; $i++) {
-                $randomIndex = rand(0, strlen($characters) - 1);
-                $code .= $characters[$randomIndex];
-            }
-            return $code;
-        }
-
         // Save additional Likert responses after game ends
         $q3Response = $_POST["q3"];
         $q4Response = $_POST["q4"];

@@ -154,7 +154,6 @@
                 }
                 return $code;
             }
-.
 
         // Save additional Likert responses after game ends
         $q3Response = $_POST["q3"];

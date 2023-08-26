@@ -190,9 +190,10 @@
         </div>
 
         <!-- Likert scale questions for participants -->
-        <h2>Participant Questionnaire</h2>
-        <p>Please rate the following statements:</p>
         <div id="page-likertQuestions" class="view">
+            <h2>Participant Questionnaire</h2>
+            <p>Please rate the following statements:</p>
+
             <p>1. I am excited to participate in this game:</p>
             <label><input type="radio" name="q1" value="1"> Strongly Disagree</label>
             <label><input type="radio" name="q1" value="2"> Disagree</label>
@@ -272,7 +273,7 @@
         $(document).ready(function() {
             // Display consent page initially
             $('#consentPage').show();
-            $('#page-likertQuestions').hide(); // Hide the questionnaire initially
+            $('#page-likertQuestions').show(); // Show the pre-questionnaire initially
 
             $('#consentForm').on('submit', function(event) {
                 event.preventDefault();
@@ -282,7 +283,6 @@
                     $.post('record_consent.php', { time: new Date().toISOString() }, function(data) {
                         if (data.success) {
                             $('#consentPage').hide();
-                            $('#page-likertQuestions').show(); // Show the questionnaire
                         } else {
                             alert('Error recording consent. Please try again.');
                         }
@@ -291,7 +291,6 @@
                     alert('You must consent to participate.');
                 }
             });
-
 
         $(function() {
             $(".button").button();

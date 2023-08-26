@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Ultimatum Game</title>
+    <title>Ultimatum Game 2</title>
     <style>
         /* CSS styles go here */
         body {

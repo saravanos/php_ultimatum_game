@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         .view {
-            display: none;
+    display: none;
             padding: 20px;
             background-color: #f9f9f9;
             border-radius: 10px;
@@ -301,6 +301,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         });
 
         document.addEventListener("DOMContentLoaded", function() {
+            // ... Existing JavaScript code ...
 
             const likertQuestions = document.getElementById("likertQuestions");
             const startGameButton = document.getElementById("startGame");
@@ -329,5 +330,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         });
     </script>
+
+<script>
+    $(document).ready(function() {
+        $('#consentPage').show();
+    });
+</script>
+
 </body>
 </html>

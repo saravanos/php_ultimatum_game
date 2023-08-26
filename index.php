@@ -207,7 +207,22 @@
 
     <!-- Additional Likert scale questions after the game ends -->
     <div id="likertQuestionsEnd" style="display: none;">
-        <!-- ... Additional Likert questions ... -->
+        <h2>Participant Feedback</h2>
+        <p>Please rate the following statements:</p>
+        <p>3. I enjoyed participating in the game:</p>
+        <label><input type="radio" name="q3" value="1"> Strongly Disagree</label>
+        <label><input type="radio" name="q3" value="2"> Disagree</label>
+        <label><input type="radio" name="q3" value="3"> Neutral</label>
+        <label><input type="radio" name="q3" value="4"> Agree</label>
+        <label><input type="radio" name="q3" value="5"> Strongly Agree</label>
+
+        <p>4. I felt satisfied with my decisions during the game:</p>
+        <label><input type="radio" name="q4" value="1"> Strongly Disagree</label>
+        <label><input type="radio" name="q4" value="2"> Disagree</label>
+        <label><input type="radio" name="q4" value="3"> Neutral</label>
+        <label><input type="radio" name="q4" value="4"> Agree</label>
+        <label><input type="radio" name="q4" value="5"> Strongly Agree</label>
+
         <button id="submitFeedback">Submit Feedback</button>
     </div>
 

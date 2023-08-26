@@ -331,11 +331,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         });
     </script>
 
-<script>
-    $(document).ready(function() {
-        $('#consentPage').show();
-    });
-</script>
-
-</body>
-</html>

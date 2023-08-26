@@ -95,6 +95,10 @@
         }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- jQuery Mobile -->
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.5.0/jquery.mobile-1.5.0.min.css">
+    <script src="https://code.jquery.com/mobile/1.5.0/jquery.mobile-1.5.0.min.js"></script>
 </head>
 <body>
     <?php
@@ -189,21 +193,21 @@
         <label><input type="radio" name="q2" value="4"> Agree</label>
         <label><input type="radio" name="q2" value="5"> Strongly Agree</label>
     </div>
-    <button id="startGame">Start Game</button>
+    <button id="startGame" class="ui-btn ui-btn-b ui-corner-all">Start Game</button>
 
     <!-- Player 1's view -->
     <div id="player1" class="view">
         <label for="proposal" class="label">Player 1's Proposal: $</label>
         <input type="number" id="proposal" class="input" min="0" max="100" step="1">
-        <button id="submit" class="button">Submit Proposal</button>
+    <button id="submit" class="ui-btn ui-btn-b ui-corner-all">Submit Proposal</button>
         <p id="result" class="result"></p>
     </div>
 
     <!-- Player 2's view -->
     <div id="player2" class="view">
         <p class="proposal">Player 1 proposes to give you: <span id="proposalAmount" class="amount"></span></p>
-        <button id="accept" class="button">Accept</button>
-        <button id="reject" class="button">Reject</button>
+        <button id="accept" class="ui-btn ui-btn-b ui-corner-all">Accept</button>
+        <button id="reject" class="ui-btn ui-btn-b ui-corner-all">Reject</button>
         <p id="result" class="result"></p>
     </div>
 
@@ -240,7 +244,7 @@
         <label><input type="radio" name="q4" value="4"> Agree</label>
         <label><input type="radio" name="q4" value="5"> Strongly Agree</label>
 
-        <button id="submitFeedback">Submit Feedback</button>
+        <button id="submitFeedback" class="ui-btn ui-btn-b ui-corner-all">Submit Feedback</button>
     </div>
 
     <!-- Thank you and compensation code -->

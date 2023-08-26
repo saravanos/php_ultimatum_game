@@ -140,24 +140,25 @@
             $stmtCode = $conn->prepare($insertCompensationCodeQuery);
             $stmtCode->bind_param("s", $compensationCode);
             $stmtCode->execute();
+
+            // Save additional Likert responses after game ends
+            $q3Response = $_POST["q3"];
+            $q4Response = $_POST["q4"];
+
+            // Insert additional Likert responses into the database
+            $insertFeedbackQuery = "INSERT INTO feedback_responses (question_3, question_4) VALUES (?, ?)";
+            $stmtFeedback = $conn->prepare($insertFeedbackQuery);
+            $stmtFeedback->bind_param("ii", $q3Response, $q4Response);
+            $stmtFeedback->execute();
+
+            // Generate and store a random compensation code
+            $compensationCode = generateRandomCode();
+            $insertCompensationCodeQuery = "INSERT INTO compensation_codes (code) VALUES (?)";
+            $stmtCode = $conn->prepare($insertCompensationCodeQuery);
+            $stmtCode->bind_param("s", $compensationCode);
+            $stmtCode->execute();
+
         }
-
-        // Save additional Likert responses after game ends
-        $q3Response = $_POST["q3"];
-        $q4Response = $_POST["q4"];
-
-        // Insert additional Likert responses into the database
-        $insertFeedbackQuery = "INSERT INTO feedback_responses (question_3, question_4) VALUES (?, ?)";
-        $stmtFeedback = $conn->prepare($insertFeedbackQuery);
-        $stmtFeedback->bind_param("ii", $q3Response, $q4Response);
-        $stmtFeedback->execute();
-
-        // Generate and store a random compensation code
-        $compensationCode = generateRandomCode();
-        $insertCompensationCodeQuery = "INSERT INTO compensation_codes (code) VALUES (?)";
-        $stmtCode = $conn->prepare($insertCompensationCodeQuery);
-        $stmtCode->bind_param("s", $compensationCode);
-        $stmtCode->execute();
 
         function generateRandomCode() {
             $characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";

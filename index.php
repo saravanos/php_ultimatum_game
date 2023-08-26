@@ -178,7 +178,7 @@
     <!-- Likert scale questions for participants -->
     <h2>Participant Questionnaire</h2>
     <p>Please rate the following statements:</p>
-    <div id="likertQuestions">
+    <div id="page-likertQuestions" data-role="page">
         <p>1. I am excited to participate in this game:</p>
         <label><input type="radio" name="q1" value="1"> Strongly Disagree</label>
         <label><input type="radio" name="q1" value="2"> Disagree</label>
@@ -196,7 +196,7 @@
     <button id="startGame" class="ui-btn ui-btn-b ui-corner-all">Start Game</button>
 
     <!-- Player 1's view -->
-    <div id="player1" class="view">
+    <div id="page-player1" data-role="page">
         <label for="proposal" class="label">Player 1's Proposal: $</label>
         <input type="number" id="proposal" class="input" min="0" max="100" step="1">
     <button id="submit" class="ui-btn ui-btn-b ui-corner-all">Submit Proposal</button>
@@ -204,7 +204,7 @@
     </div>
 
     <!-- Player 2's view -->
-    <div id="player2" class="view">
+    <div id="player2" data-role="page">
         <p class="proposal">Player 1 proposes to give you: <span id="proposalAmount" class="amount"></span></p>
         <button id="accept" class="ui-btn ui-btn-b ui-corner-all">Accept</button>
         <button id="reject" class="ui-btn ui-btn-b ui-corner-all">Reject</button>
@@ -212,7 +212,7 @@
     </div>
 
     <!-- Results view -->
-    <div id="results" class="view">
+    <div id="results" data-role="page">
         <h2 class="subtitle">Results</h2>
         <table class="table">
             <tr>
@@ -227,7 +227,7 @@
     </div>
 
     <!-- Additional Likert scale questions after the game ends -->
-    <div id="likertQuestionsEnd" style="display: none;">
+    <div id="likertQuestionsEnd" data-role="page">
         <h2>Participant Feedback</h2>
         <p>Please rate the following statements:</p>
         <p>3. I enjoyed participating in the game:</p>

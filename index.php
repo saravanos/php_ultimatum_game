@@ -179,7 +179,14 @@
         <div id="consentPage" class="view">
             <h2>Consent to Participate</h2>
             <p>Do you consent to participate in the Ultimatum Game 2?</p>
-            <button id="consentYes" class="button">Yes</button>
+            <form id="consentForm">
+                <label>
+                    <input type="checkbox" id="consentCheckbox" required>
+                    I consent to participate
+                </label>
+                <br>
+                <button id="consentSubmit" class="button" type="submit">Submit</button>
+            </form>
         </div>
 
         <!-- Likert scale questions for participants -->
@@ -266,16 +273,22 @@
             // Display consent page initially
             $('#consentPage').show();
 
-            $('#consentYes').on('click', function() {
-                // Record the consent in the database
-                $.post('record_consent.php', { time: new Date().toISOString() }, function(data) {
-                    if (data.success) {
-                        $('#consentPage').hide();
-                        // Display the next part of your game or instructions here
-                    } else {
-                        alert('Error recording consent. Please try again.');
-                    }
-                });
+            $('#consentForm').on('submit', function(event) {
+                event.preventDefault();
+
+                if ($('#consentCheckbox').prop('checked')) {
+                    // Record the consent in the database
+                    $.post('record_consent.php', { time: new Date().toISOString() }, function(data) {
+                        if (data.success) {
+                            $('#consentPage').hide();
+                            // Display the next part of your game or instructions here
+                        } else {
+                            alert('Error recording consent. Please try again.');
+                        }
+                    });
+                } else {
+                    alert('You must consent to participate.');
+                }
             });
         });
 

@@ -218,11 +218,15 @@
             var player1order = ["consentPage", "likertQuestions", "page-both1", "page-both2", "page-both3", "page-both4", "page-player1-view1", "page-player1-view2", "page-both5", "page-player1-view3", "results", "likertQuestionsEnd", "thankYou"];
             var player2order = ["consentPage", "likertQuestions", "page-both1", "page-both2", "page-both3", "page-both4", "page-player2-view1", "page-player2-view2", "page-both5", "page-player2-view3", "results", "likertQuestionsEnd", "thankYou"];
 
-            var role = // 1 to indicate player1 or 2 to indicate player2
+            var role = assignRole();// 1 to indicate player1 or 2 to indicate player2
             var playerPosition = 0 // which page the player is on
 
             var player1offer = -1 // amount of offer, from 0 to 100, -1 indicated unset
             var player2decision = -1 // 0 to indicate offer was rejected 1 to indicate offer was accepted, -1 indicated unset
+
+            function assignRole() {
+                return Math.floor(Math.random() * 2) + 1; // This will return either 1 or 2
+            }
 
             function switchToView(role, position) {
                 var orderArray = (role === 1) ? player1order : player2order;

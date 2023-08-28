@@ -228,16 +228,22 @@
                 return Math.floor(Math.random() * 2) + 1; // This will return either 1 or 2
             }
 
-            function switchToView(role, position) {
-                var orderArray = (role === 1) ? player1order : player2order;
-                var nextPage = orderArray[position];
-                $("#" + nextPage).show();
-            }
+            // Function to switch to the next view in the player1order array
+                    function switchToNextView() {
+                        if (playerPosition < player1order.length) {
+                            const nextPage = player1order[playerPosition];
+                            $(".view").hide();
+                            $("#" + nextPage).show();
+                        }
+                    }
 
-            startGameButton.addEventListener("click", function() {
-                likertQuestions.style.display = "none";
-                switchToView(role, playerPosition + 1);
-            });
+                    // Event listener for the "Start Game" button
+                    startGameButton.addEventListener("click", function() {
+                        likertQuestions.style.display = "none";
+                        playerPosition++; // Move to the first player 1 view
+                        switchToNextView();
+                    });
+
 
             $(".accept-button").click(function() {
                 // Handle accept logic here

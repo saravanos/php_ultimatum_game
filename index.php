@@ -76,7 +76,7 @@
     <!DOCTYPE html>
     <html>
         <head>
-            <title>Ultimatum Game 2</title>
+            <title>Ultimatum Game 3</title>
             <style>
                 /* CSS styles go here */
                 body {

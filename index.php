@@ -42,8 +42,8 @@
                 <label><input type="radio" name="q2" value="3"> Neutral</label>
                 <label><input type="radio" name="q2" value="4"> Agree</label>
                 <label><input type="radio" name="q2" value="5"> Strongly Agree</label>
+                <button id="startGame" class="button">Submit</button>
             </div>
-            <button id="startGame" class="button">Start Game</button>
 
             <!-- Player 1's view -->
             <div id="page-both1" class="view">

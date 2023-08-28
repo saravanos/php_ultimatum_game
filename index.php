@@ -29,14 +29,14 @@
                         $("#" + nextPage).show();
                     }
                 }
-alert("xxx5");
+/*
                 // Event listener for the "Start Game" button
                 startGameButton.addEventListener("click", function() {
                     likertQuestions.style.display = "none";
                     playerPosition++; // Move to the first player 1 view
                     switchToNextView();
                 });
-
+*/
                 $(".accept-button").click(function() {
                     // Handle accept logic here
                     playerPosition++; // Increment position
@@ -48,7 +48,7 @@ alert("xxx5");
                     playerPosition++; // Increment position
                     switchToView(role, playerPosition);
                 });
-
+alert("xxx7");
                 $(document).ready(function() {
                     alert("Hi");
                     // Display consent page initially

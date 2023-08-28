@@ -55,22 +55,6 @@
                     // Display consent page initially
                     $('#consentPage').show();
 
-                    $('#consentForm').on('submit', function(event) {
-                        event.preventDefault();
-
-                        if ($('#consentCheckbox').prop('checked')) {
-                            // Record the consent in the database
-                            $.post('record_consent.php', { time: new Date().toISOString() }, function(data) {
-                                if (data.success) {
-                                    $('#consentPage').hide();
-                                } else {
-                                    alert('Error recording consent. Please try again.');
-                                }
-                            });
-                        } else {
-                            alert('You must consent to participate.');
-                        }
-                    });
     /*
                     $(function() {
                         $(".button").button();

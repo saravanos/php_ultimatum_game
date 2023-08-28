@@ -52,9 +52,8 @@
 */
 
                 $(document).ready(function() {
-                    alert("Hi");
                     // Display consent page initially
-                    $('#consentPage').show();  /*
+                    $('#consentPage').show();
 
                     $('#consentForm').on('submit', function(event) {
                         event.preventDefault();
@@ -70,7 +69,7 @@
                             });
                         } else {
                             alert('You must consent to participate.');
-                        } */
+                        }
                     });
     /*
                     $(function() {

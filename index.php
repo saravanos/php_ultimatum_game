@@ -7,103 +7,103 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
         <link rel="stylesheet" type="text/css" href="styles.css">
         <script>
-                    var player1order = ["consentPage", "likertQuestions", "page-both1", "page-both2", "page-both3", "page-both4", "page-player1-view1", "page-player1-view2", "page-both5", "page-player1-view3", "results", "likertQuestionsEnd", "thankYou"];
-                    var player2order = ["consentPage", "likertQuestions", "page-both1", "page-both2", "page-both3", "page-both4", "page-player2-view1", "page-player2-view2", "page-both5", "page-player2-view3", "results", "likertQuestionsEnd", "thankYou"];
+            var player1order = ["consentPage", "likertQuestions", "page-both1", "page-both2", "page-both3", "page-both4", "page-player1-view1", "page-player1-view2", "page-both5", "page-player1-view3", "results", "likertQuestionsEnd", "thankYou"];
+            var player2order = ["consentPage", "likertQuestions", "page-both1", "page-both2", "page-both3", "page-both4", "page-player2-view1", "page-player2-view2", "page-both5", "page-player2-view3", "results", "likertQuestionsEnd", "thankYou"];
 
-                    var role = assignRole();// 1 to indicate player1 or 2 to indicate player2
-                    var playerPosition = 0 // which page the player is on
+            var role = assignRole();// 1 to indicate player1 or 2 to indicate player2
+            var playerPosition = 0; // which page the player is on
 
-                    var player1offer = -1 // amount of offer, from 0 to 100, -1 indicated unset
-                    var player2decision = -1 // 0 to indicate offer was rejected 1 to indicate offer was accepted, -1 indicated unset
+            var player1offer = -1; // amount of offer, from 0 to 100, -1 indicated unset
+            var player2decision = -1; // 0 to indicate offer was rejected 1 to indicate offer was accepted, -1 indicated unset
 
-                    function assignRole() {
-                        return Math.floor(Math.random() * 2) + 1; // This will return either 1 or 2
-                    }
+            function assignRole() {
+                return Math.floor(Math.random() * 2) + 1; // This will return either 1 or 2
+            }
 
-                    // Function to switch to the next view in the player1order array
-                            function switchToNextView() {
-                                if (playerPosition < player1order.length) {
-                                    const nextPage = player1order[playerPosition];
-                                    $(".view").hide();
-                                    $("#" + nextPage).show();
-                                }
-                            }
+            // Function to switch to the next view in the player1order array
+            function switchToNextView() {
+                if (playerPosition < player1order.length) {
+                    const nextPage = player1order[playerPosition];
+                    $(".view").hide();
+                    $("#" + nextPage).show();
+                }
+            }
 
-                            // Event listener for the "Start Game" button
-                            startGameButton.addEventListener("click", function() {
-                                likertQuestions.style.display = "none";
-                                playerPosition++; // Move to the first player 1 view
-                                switchToNextView();
-                            });
+            // Event listener for the "Start Game" button
+            startGameButton.addEventListener("click", function() {
+                likertQuestions.style.display = "none";
+                playerPosition++; // Move to the first player 1 view
+                switchToNextView();
+            });
 
 
-                    $(".accept-button").click(function() {
-                        // Handle accept logic here
-                        playerPosition++; // Increment position
-                        switchToView(role, playerPosition);
-                    });
+            $(".accept-button").click(function() {
+                // Handle accept logic here
+                playerPosition++; // Increment position
+                switchToView(role, playerPosition);
+            });
 
-                    $(".reject-button").click(function() {
-                        // Handle reject logic here
-                        playerPosition++; // Increment position
-                        switchToView(role, playerPosition);
-                    });
+            $(".reject-button").click(function() {
+                // Handle reject logic here
+                playerPosition++; // Increment position
+                switchToView(role, playerPosition);
+            });
 
-                    $(document).ready(function() {
-                        alert("Hi")
-                        // Display consent page initially
-                        $('#consentPage').show();
+            $(document).ready(function() {
+                alert("Hi")
+                // Display consent page initially
+                $('#consentPage').show();  /*
 
-                        $('#consentForm').on('submit', function(event) {
-                            event.preventDefault();
+                $('#consentForm').on('submit', function(event) {
+                    event.preventDefault();
 
-                            if ($('#consentCheckbox').prop('checked')) {
-                                // Record the consent in the database
-                                $.post('record_consent.php', { time: new Date().toISOString() }, function(data) {
-                                    if (data.success) {
-                                        $('#consentPage').hide();
-                                    } else {
-                                        alert('Error recording consent. Please try again.');
-                                    }
-                                });
+                    if ($('#consentCheckbox').prop('checked')) {
+                        // Record the consent in the database
+                        $.post('record_consent.php', { time: new Date().toISOString() }, function(data) {
+                            if (data.success) {
+                                $('#consentPage').hide();
                             } else {
-                                alert('You must consent to participate.');
+                                alert('Error recording consent. Please try again.');
                             }
                         });
+                    } else {
+                        alert('You must consent to participate.');
+                    } */
+                });
+/*
+                $(function() {
+                    $(".button").button();
+                });
 
-                    $(function() {
-                        $(".button").button();
+                document.addEventListener("DOMContentLoaded", function() {
+                    // ... Existing JavaScript code ...
+
+                    const likertQuestions = document.getElementById("likertQuestions");
+                    const startGameButton = document.getElementById("startGame");
+
+                    startGameButton.addEventListener("click", function() {
+                        likertQuestions.style.display = "none";
+                        switchToPlayer2View();
                     });
 
-                    document.addEventListener("DOMContentLoaded", function() {
-                        // ... Existing JavaScript code ...
+                    const likertQuestionsEnd = document.getElementById("likertQuestionsEnd");
+                    const submitFeedbackButton = document.getElementById("submitFeedback");
+                    const thankYouMessage = document.getElementById("thankYou");
+                    const compensationCodeElement = document.getElementById("compensationCode");
 
-                        const likertQuestions = document.getElementById("likertQuestions");
-                        const startGameButton = document.getElementById("startGame");
+                    submitFeedbackButton.addEventListener("click", function() {
+                        likertQuestionsEnd.style.display = "none";
+                        thankYouMessage.style.display = "block";
+                        const q3Response = document.querySelector('input[name="q3"]:checked').value;
+                        const q4Response = document.querySelector('input[name="q4"]:checked').value;
+                        sendData(q3Response, q4Response); // Send feedback to the server
 
-                        startGameButton.addEventListener("click", function() {
-                            likertQuestions.style.display = "none";
-                            switchToPlayer2View();
-                        });
-
-                        const likertQuestionsEnd = document.getElementById("likertQuestionsEnd");
-                        const submitFeedbackButton = document.getElementById("submitFeedback");
-                        const thankYouMessage = document.getElementById("thankYou");
-                        const compensationCodeElement = document.getElementById("compensationCode");
-
-                        submitFeedbackButton.addEventListener("click", function() {
-                            likertQuestionsEnd.style.display = "none";
-                            thankYouMessage.style.display = "block";
-                            const q3Response = document.querySelector('input[name="q3"]:checked').value;
-                            const q4Response = document.querySelector('input[name="q4"]:checked').value;
-                            sendData(q3Response, q4Response); // Send feedback to the server
-
-                            // Generate and display a random compensation code
-                            const compensationCode = generateRandomCode();
-                            compensationCodeElement.textContent = compensationCode;
-                        });
+                        // Generate and display a random compensation code
+                        const compensationCode = generateRandomCode();
+                        compensationCodeElement.textContent = compensationCode;
                     });
-                    </script>
+                }); */
+            </script>
         </head>
         <body>
             <div id="consentPage" class="view">

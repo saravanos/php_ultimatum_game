@@ -2,14 +2,11 @@
     <html>
         <head>
             <title>Ultimatum Game 3</title>
-            
-            
-
             <!-- jQuery UI -->
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.min.css">
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
         <link rel="stylesheet" type="text/css" href="styles.css">
-</head>
+        </head>
         <body>
             <div id="consentPage" class="view">
                 <h2>Consent to Participate</h2>
@@ -258,6 +255,7 @@
             });
 
             $(document).ready(function() {
+                alert("Hi")
                 // Display consent page initially
                 $('#consentPage').show();
 

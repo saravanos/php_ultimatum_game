@@ -55,6 +55,22 @@
                     // Display consent page initially
                     $('#consentPage').show();
 
+                    let playerOrder; // Array to store the order for the current player
+                    if (role === 1) {
+                        playerOrder = player1order;
+                    } else if (role === 2) {
+                        playerOrder = player2order;
+                    }
+
+                    // Function to show the next page based on role and progress
+                        function showNextPage(order) {
+                            if (playerPosition < order.length) {
+                                const nextPage = order[playerPosition];
+                                $(".view").hide();
+                                $("#" + nextPage).show();
+                            }
+                        }
+
     /*
                     $(function() {
                         $(".button").button();

@@ -86,8 +86,8 @@
                             // Generate and display a random compensation code
                             const compensationCode = generateRandomCode();
                             compensationCodeElement.textContent = compensationCode;
-                        });
-                    }); */
+                        });*/
+                    });
                 </script>
             </head>
         <body>

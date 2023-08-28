@@ -30,7 +30,7 @@
                         $("#" + nextPage).show();
                     }
                 }
-
+/*
                 // Event listener for the "Start Game" button
                 startGameButton.addEventListener("click", function() {
                     likertQuestions.style.display = "none";
@@ -49,6 +49,7 @@
                     playerPosition++; // Increment position
                     switchToView(role, playerPosition);
                 });
+*/
 
                 $(document).ready(function() {
                     alert("Hi");

@@ -315,8 +315,8 @@
                                     A would keep 0 units.
 
                                     Do you accept or reject this offer? <span id="proposalAmount" class="amount"></span></p>
-                <button id="accept" class="ui-btn ui-btn-b ui-corner-all">I accept A's offer (You get 100 units A gets 0 units)</button>
-                <button id="accept" class="ui-btn ui-btn-b ui-corner-all">I reject A's offer (You get 0 units A gets 0 units)</button>
+                <button id="acceptButton" class="ui-btn ui-btn-b ui-corner-all">I accept A's offer (You get 100 units A gets 0 units)</button>
+                <button id="rejectButton" class="ui-btn ui-btn-b ui-corner-all">I reject A's offer (You get 0 units A gets 0 units)</button>
                 <p id="result" class="result"></p>
             </div>
 
@@ -332,10 +332,8 @@
              <!-- Player 2's view -->
             <div id="page-player2-view3" class="view">
                 <p class="proposal">You have decided to accept A's offer.
-
                                     You got 100 units and A got 0 units.<span id="proposalAmount" class="amount"></span></p>
-                <button id="accept" class="ui-btn ui-btn-b ui-corner-all">I accept A's offer (You get 100 units A gets 0 units)</button>
-                <button id="accept" class="ui-btn ui-btn-b ui-corner-all">I reject A's offer (You get 0 units A gets 0 units)</button>
+                <button id="accept" class="ui-btn ui-btn-b ui-corner-all">Next</button>
                 <p id="result" class="result"></p>
             </div>
 
@@ -382,14 +380,37 @@
             </div>
 
         <script>
-            var player1order = {"consentPage", "likertQuestions", "page-both1", "page-both2", "page-both3", "page-both4", "page-player1-view1", "page-player1-view2", "page-both5", "page-player1-view3", "results", "likertQuestionsEnd", "thankYou"}
-            var player2order = {"consentPage", "likertQuestions", "page-both1", "page-both2", "page-both3", "page-both4", "page-player2-view1", "page-player2-view2", "page-both5", "page-player2-view3", "results", "likertQuestionsEnd", "thankYou"}
+            var player1order = ["consentPage", "likertQuestions", "page-both1", "page-both2", "page-both3", "page-both4", "page-player1-view1", "page-player1-view2", "page-both5", "page-player1-view3", "results", "likertQuestionsEnd", "thankYou"];
+            var player2order = ["consentPage", "likertQuestions", "page-both1", "page-both2", "page-both3", "page-both4", "page-player2-view1", "page-player2-view2", "page-both5", "page-player2-view3", "results", "likertQuestionsEnd", "thankYou"];
 
             var role = // 1 to indicate player1 or 2 to indicate player2
             var playerPosition = 0 // which page the player is on
 
             var player1offer = -1 // amount of offer, from 0 to 100, -1 indicated unset
             var player2decision = -1 // 0 to indicate offer was rejected 1 to indicate offer was accepted, -1 indicated unset
+
+            function switchToView(role, position) {
+                var orderArray = (role === 1) ? player1order : player2order;
+                var nextPage = orderArray[position];
+                $("#" + nextPage).show();
+            }
+
+            startGameButton.addEventListener("click", function() {
+                likertQuestions.style.display = "none";
+                switchToView(role, playerPosition + 1);
+            });
+
+            $(".accept-button").click(function() {
+                // Handle accept logic here
+                playerPosition++; // Increment position
+                switchToView(role, playerPosition);
+            });
+
+            $(".reject-button").click(function() {
+                // Handle reject logic here
+                playerPosition++; // Increment position
+                switchToView(role, playerPosition);
+            });
 
             $(document).ready(function() {
                 // Display consent page initially

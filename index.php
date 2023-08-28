@@ -20,7 +20,7 @@
                 function assignRole() {
                     return Math.floor(Math.random() * 2) + 1; // This will return either 1 or 2
                 }
-alert("xxx2");
+
                 // Function to switch to the next view in the player1order array
                 function switchToNextView() {
                     if (playerPosition < player1order.length) {
@@ -49,7 +49,7 @@ alert("xxx2");
                     playerPosition++; // Increment position
                     switchToView(role, playerPosition);
                 });
-
+alert("xxx3");
                 $(document).ready(function() {
                     alert("Hi");
                     // Display consent page initially

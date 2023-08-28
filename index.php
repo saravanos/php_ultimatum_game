@@ -36,8 +36,7 @@
                     playerPosition++; // Move to the first player 1 view
                     switchToNextView();
                 });
-
-
+alert("xxx4");
                 $(".accept-button").click(function() {
                     // Handle accept logic here
                     playerPosition++; // Increment position
@@ -49,7 +48,7 @@
                     playerPosition++; // Increment position
                     switchToView(role, playerPosition);
                 });
-alert("xxx3");
+
                 $(document).ready(function() {
                     alert("Hi");
                     // Display consent page initially

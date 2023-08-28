@@ -29,14 +29,14 @@
                         $("#" + nextPage).show();
                     }
                 }
-
+alert("xxx5");
                 // Event listener for the "Start Game" button
                 startGameButton.addEventListener("click", function() {
                     likertQuestions.style.display = "none";
                     playerPosition++; // Move to the first player 1 view
                     switchToNextView();
                 });
-alert("xxx4");
+
                 $(".accept-button").click(function() {
                     // Handle accept logic here
                     playerPosition++; // Increment position

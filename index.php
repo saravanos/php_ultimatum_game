@@ -8,7 +8,6 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
             <link rel="stylesheet" type="text/css" href="styles.css">
             <script>
-
                 var player1order = ["consentPage", "likertQuestions", "page-both1", "page-both2", "page-both3", "page-both4", "page-player1-view1", "page-player1-view2", "page-both5", "page-player1-view3", "results", "likertQuestionsEnd", "thankYou"];
                 var player2order = ["consentPage", "likertQuestions", "page-both1", "page-both2", "page-both3", "page-both4", "page-player2-view1", "page-player2-view2", "page-both5", "page-player2-view3", "results", "likertQuestionsEnd", "thankYou"];
 
@@ -62,14 +61,27 @@
                         playerOrder = player2order;
                     }
 
-                    // Function to show the next page based on role and progress
-                        function showNextPage(order) {
-                            if (playerPosition < order.length) {
-                                const nextPage = order[playerPosition];
-                                $(".view").hide();
-                                $("#" + nextPage).show();
-                            }
+                    function getNextPage(currentPage) {
+                        var currentIndex = playerOrder.indexOf(currentPage);
+
+                        if (currentIndex !== -1 && currentIndex < playerOrder.length - 1) {
+                            return playerOrder[currentIndex + 1];
                         }
+                        return null; // Returns null if current page is the last page or not found in the sequence
+                    }
+
+                    $("#transitionButton").click(function() {
+                        // Assuming the current page has an ID or class that identifies it
+                        var currentPage = $(".currentPage").attr("id");
+
+                        var nextPage = getNextPage(currentPage);
+                        if (nextPage) {
+                            // Transition to the next page
+                            // For demonstration, I'll hide the current page and show the next page
+                            $("#" + currentPage).hide();
+                            $("#" + nextPage).show();
+                        }
+                    });
 
     /*
                     $(function() {

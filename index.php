@@ -7,6 +7,7 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
             <link rel="stylesheet" type="text/css" href="styles.css">
             <script>
+                alert("xxx");
                 var player1order = ["consentPage", "likertQuestions", "page-both1", "page-both2", "page-both3", "page-both4", "page-player1-view1", "page-player1-view2", "page-both5", "page-player1-view3", "results", "likertQuestionsEnd", "thankYou"];
                 var player2order = ["consentPage", "likertQuestions", "page-both1", "page-both2", "page-both3", "page-both4", "page-player2-view1", "page-player2-view2", "page-both5", "page-player2-view3", "results", "likertQuestionsEnd", "thankYou"];
 

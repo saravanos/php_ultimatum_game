@@ -260,7 +260,6 @@
             $(document).ready(function() {
                 // Display consent page initially
                 $('#consentPage').show();
-                $('#page-likertQuestions').show(); // Show the pre-questionnaire initially
 
                 $('#consentForm').on('submit', function(event) {
                     event.preventDefault();

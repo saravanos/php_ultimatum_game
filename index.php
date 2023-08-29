@@ -29,6 +29,20 @@
                         $("#" + nextPage).show();
                     }
                 }
+
+                $("#consentSubmit").click(function(event) {
+                    event.preventDefault(); // Prevent the form from submitting
+
+                    // Check if the consent checkbox is checked
+                    if ($("#consentCheckbox").prop("checked")) {
+                        // Hide the consent page
+                        $('#consentPage').hide();
+                        // Show the likertQuestions page
+                        $('#page-likertQuestions').show();
+                    } else {
+                        // Display an error message or take appropriate action
+                    }
+                });
 /*
                 // Event listener for the "Start Game" button
                 startGameButton.addEventListener("click", function() {
